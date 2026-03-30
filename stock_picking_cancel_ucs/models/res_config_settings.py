@@ -1,0 +1,12 @@
+# -*- coding:utf-8 -*-
+from odoo import models,fields
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    stock_picking_operation_type = fields.Selection([
+        ('cancel_only', 'Cancel Only'),
+        ('cancel_and_reset_to_draft', 'Cancel and Reset To Draft'),
+        ('cancel_and_delete', 'Cancel and Delete')], string="Stock Picking Operation Type",
+        related="company_id.stock_picking_operation_type", readonly=False)
