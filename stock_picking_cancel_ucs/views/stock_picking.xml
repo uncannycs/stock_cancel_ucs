@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_inherit_l10n_it_ddt" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="picking_operation_type" invisible="1"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button name="action_picking_cancel" type="object" string="Cancel" groups="stock_picking_cancel_ucs.group_stock_cancel_feature" attrs="{'invisible': ['|',('picking_operation_type', '!=', 'cancel_only'),('state','!=','done')]}"/>
+                <button name="action_picking_cancel_reset" type="object" string="Cancel and Reset" groups="stock_picking_cancel_ucs.group_stock_cancel_feature" attrs="{'invisible': ['|',('picking_operation_type', '!=', 'cancel_and_reset_to_draft'),('state','=','draft')]}"/>
+                <button name="action_picking_cancel_delete" type="object" string="Cancel and Delete" groups="stock_picking_cancel_ucs.group_stock_cancel_feature" attrs="{'invisible': [('picking_operation_type', '!=', 'cancel_and_delete')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="picking_cancel_delete">
+        <field name="name">Cancel And Delete Orders</field>
+        <field name="model_id" ref="model_stock_picking"/>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_picking_cancel_delete()
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="picking_cancel_reset">
+        <field name="name">Cancel And Reset Orders</field>
+        <field name="model_id" ref="model_stock_picking"/>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_picking_cancel_reset()
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="picking_cancel">
+        <field name="name">Cancel Orders</field>
+        <field name="model_id" ref="model_stock_picking"/>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_picking_cancel()
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_stock_cancel_feature" model="res.groups">
+        <field name="name">Stock Transfer Cancel Features</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>
