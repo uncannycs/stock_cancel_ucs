@@ -8,7 +8,7 @@
 #
 ##############################################################################
 {
-    "name": "Stock Picking Cancel",
+    "name": "Stock Picking Cancel UCS",
     "summary": "Stock Picking Cancel",
     "version": "14.0.1.0.0",
     "category": "Extra Tools",
@@ -29,6 +29,6 @@
     "application": False,
     "installable": True,
     "preloadable": True,
-    "price": 70,
+    "price": 40,
     "currency": "USD",
 }
